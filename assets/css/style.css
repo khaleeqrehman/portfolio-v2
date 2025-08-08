@@ -1,0 +1,331 @@
+
+/* ========================================
+   BLOG MAIN STRUCTURE
+   ======================================== */
+.blog-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* ========================================
+   BLOG SIDEBAR STYLING
+   ======================================== */
+.blog-sidebar {
+  padding-left: 20px;
+}
+
+.sidebar-widget {
+  background: #fff;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.sidebar-widget h4 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 5px;
+}
+
+/* Search Box */
+.search-form {
+  display: flex;
+}
+.search-form input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px 0 0 4px;
+}
+.search-form button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+}
+
+/* Categories List */
+.categories-widget ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.categories-widget ul li {
+  margin-bottom: 8px;
+}
+.categories-widget ul li a {
+  text-decoration: none;
+  color: #333;
+  transition: color 0.3s;
+}
+.categories-widget ul li a:hover {
+  color: #007bff;
+}
+
+/* Tags */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.tags a {
+  display: inline-block;
+  background: #f5f5f5;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+  text-decoration: none;
+  color: #333;
+  transition: all 0.3s;
+}
+.tags a:hover {
+  background: #007bff;
+  color: #fff;
+}
+
+/* Call to Action */
+.cta-widget {
+  background: #e8f7e8;
+  border: 1px solid #b5e0b5;
+  text-align: center;
+}
+.cta-widget .cta-btn {
+  display: inline-block;
+  background: #25d366;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+.cta-widget .cta-btn:hover {
+  background: #1ebe5d;
+}
+
+/* ========================================
+   MARKDOWN CONTENT STYLING (For CMS)
+   ======================================== */
+.markdown-content {
+  line-height: 1.7;
+  color: #333;
+  font-size: 1.05rem;
+}
+
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4 {
+  margin-top: 1.8em;
+  margin-bottom: 0.8em;
+  color: #222;
+}
+
+.markdown-content p {
+  margin-bottom: 1.2em;
+}
+
+.markdown-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.markdown-content pre {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  border-left: 3px solid #007bff;
+  margin: 1.5rem 0;
+}
+
+.markdown-content code {
+  font-family: 'Courier New', monospace;
+  background: #f3f3f3;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+.markdown-content blockquote {
+  border-left: 4px solid #007bff;
+  padding: 0.8rem 1rem;
+  margin: 1.5rem 0;
+  background: #f8f9fa;
+  color: #555;
+  font-style: italic;
+}
+
+.markdown-content ul,
+.markdown-content ol {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.markdown-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+.markdown-content th, 
+.markdown-content td {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+}
+.markdown-content th {
+  background: #f5f5f5;
+}
+
+/* ========================================
+   BLOG CARDS & LAYOUT
+   ======================================== */
+.blog-card {
+  transition: transform 0.3s, box-shadow 0.3s;
+  height: 100%;
+}
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.blog-card img {
+  border-radius: 8px 8px 0 0;
+}
+
+.blog-card .card-body {
+  padding: 1.25rem;
+}
+
+/* ========================================
+  /* ========================================
+  DARK MODE SUPPORT
+======================================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Dark mode color variables */
+    --bg-dark: #1a1a1a;            /* Near-black background */
+    --text-dark: #e0e0e0;          /* Off-white text */
+    --link-dark: #7db1ff;          /* Soft blue links */
+    --link-hover-dark: #a3c7ff;    /* Lighter blue for hover states */
+    --sidebar-dark: #2d2d2d;       /* Dark grey sidebar */
+    --card-dark: #2d2d2d;          /* Card backgrounds */
+    --border-dark: #444;           /* Border color */
+    --code-bg-dark: #252525;       /* Code block background */
+    --table-bg-dark: #252525;      /* Table background */
+    --table-border-dark: #3a3a3a;  /* Table borders */
+  }
+
+  /* Base elements */
+  body {
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
+  }
+
+  a {
+    color: var(--link-dark);
+  }
+
+  a:hover {
+    color: var(--link-hover-dark);
+  }
+
+  /* Navigation and sidebar */
+  .blog-sidebar {
+    background-color: var(--sidebar-dark) !important;
+    border-color: var(--border-dark) !important;
+  }
+
+  /* Cards and buttons */
+  .card,
+  .btn {
+    background-color: var(--card-dark);
+    border-color: var(--border-dark);
+    color: var(--text-dark);
+  }
+
+  /* Code blocks */
+  pre, code {
+    background-color: var(--code-bg-dark);
+  }
+
+  /* Tables */
+  table {
+    background-color: var(--table-bg-dark);
+    border-color: var(--table-border-dark);
+  }
+
+  th, td {
+    border-color: var(--table-border-dark);
+  }
+
+  /* Form elements */
+  input, textarea, select {
+    background-color: var(--card-dark);
+    border-color: var(--border-dark);
+    color: var(--text-dark);
+  }
+
+  /* Utility classes */
+  .text-muted {
+    color: #a0a0a0 !important;
+  }
+
+  .bg-light {
+    background-color: var(--card-dark) !important;
+  }
+
+  .border {
+    border-color: var(--border-dark) !important;
+  }
+}
+/* ========================================
+   MOBILE RESPONSIVENESS
+   ======================================== */
+@media (max-width: 991px) {
+  .blog-sidebar {
+    margin-top: 2rem;
+    padding-left: 0;
+  }
+  
+  .col-lg-8,
+  .col-lg-4 {
+    width: 100%;
+  }
+  
+  .markdown-content {
+    font-size: 1rem;
+  }
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+.blog-tags {
+  margin-bottom: 1.5rem;
+}
+.blog-tags .badge {
+  margin-right: 0.5rem;
+  font-weight: normal;
+}
+
+.blog-share {
+  margin: 2rem 0;
+}
+.blog-share .share-icon {
+  font-size: 1.5rem;
+  margin-right: 0.8rem;
+  color: #555;
+  transition: color 0.3s;
+}
+.blog-share .share-icon:hover {
+  color: #007bff;
+}
+
+
+  

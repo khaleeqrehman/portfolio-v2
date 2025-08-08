@@ -1496,3 +1496,117 @@ section,
 .share-icon.twitter:hover {
   color: #1da1f2;
 }
+
+.blog-tags {
+  margin-top: 20px;
+}
+
+.blog-tags a {
+  display: inline-block;
+  background-color: #6c757d; /* Bootstrap secondary */
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  text-decoration: none;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.blog-tags a:hover {
+  background-color: #495057; /* darker on hover */
+}
+
+/* Mobile nav menu toggle styles */
+body.navmenu-active #header {
+  left: 0;
+}
+
+@media (max-width: 1200px) {
+  #header {
+    left: -300px;
+    transition: all 0.5s;
+    z-index: 9999;
+  }
+}
+/* Mobile nav menu toggle styles */
+body.navmenu-active #header {
+  left: 0;
+}
+
+@media (max-width: 1200px) {
+  #header {
+    left: -300px;
+    transition: all 0.5s;
+    z-index: 9999;
+  }
+}
+
+/* Add to your main.css */
+.offcanvas-start {
+  width: 300px !important;
+  background-color: var(--nav-mobile-background-color) !important;
+  color: var(--nav-color) !important;
+}
+
+.offcanvas-header {
+  border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+}
+
+.offcanvas-body .navmenu a {
+  color: var(--nav-color) !important;
+  padding: 12px 15px !important;
+}
+
+.offcanvas-body .navmenu a:hover {
+  color: var(--nav-hover-color) !important;
+}
+
+/* Mobile toggle button positioning */
+.btn[data-bs-toggle="offcanvas"] {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 9999;
+  background: var(--accent-color);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+   ====================== */
+/* Skills Section Styles */
+/* Skills Progress Bars - Foolproof Version */
+.skills .progress {
+  height: 10px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  overflow: hidden; /* Essential for animation */
+  margin-bottom: 20px;
+}
+
+.skills .progress-bar {
+  height: 100%;
+  width: 0; /* MUST be 0 - overrides any inline styles */
+  background: #3498db;
+  border-radius: 5px;
+  transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateZ(0); /* Hardware acceleration */
+}
+
+.skill-item {
+  margin-bottom: 25px;
+}
+
+.skill {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
