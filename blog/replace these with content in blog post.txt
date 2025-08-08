@@ -1,0 +1,15 @@
+Replace these placeholders:
+
+{{ blog_title }}
+
+{{ blog_description }}
+
+{{ blog_date }} → format: 2025-08-07
+
+{{ blog_image_url }}
+
+{{ blog_url }}
+
+{{ blog_intro_paragraph }}
+
+{{ site_logo_url }} → use your own logo path or remove the "logo" object if not using one

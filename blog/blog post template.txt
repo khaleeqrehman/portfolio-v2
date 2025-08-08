@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ✅ Title & Meta Description -->
+  <title>{{ blog_title }} | Khaleeq Rehman</title>
+  <meta name="description" content="{{ blog_description }}">
+
+  <!-- ✅ Open Graph (OG) Tags -->
+  <meta property="og:title" content="{{ blog_title }} | Khaleeq Rehman">
+  <meta property="og:description" content="{{ blog_description }}">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="{{ blog_url }}">
+  <meta property="og:image" content="{{ blog_image_url }}">
+
+  <!-- ✅ Twitter Card Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ blog_title }} | Khaleeq Rehman">
+  <meta name="twitter:description" content="{{ blog_description }}">
+  <meta name="twitter:image" content="{{ blog_image_url }}">
+
+  <!-- ✅ Schema Markup for Article -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "{{ blog_url }}"
+    },
+    "headline": "{{ blog_title }}",
+    "description": "{{ blog_description }}",
+    "image": "{{ blog_image_url }}",
+    "author": {
+      "@type": "Person",
+      "name": "Khaleeq Rehman"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Khaleeq Rehman",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ site_logo_url }}"
+      }
+    },
+    "datePublished": "{{ blog_date }}"
+  }
+  </script>
+
+  <!-- ✅ Styles (Bootstrap / Your custom styles) -->
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="../assets/css/style.css" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ✅ Header -->
+  <header id="header" class="header d-flex align-items-center">
+    <div class="container d-flex justify-content-between align-items-center">
+      <a href="/" class="logo">Khaleeq Rehman</a>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/#blog">Blog</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ✅ Blog Content -->
+  <main class="container mt-5">
+    <article>
+      <h1>{{ blog_title }}</h1>
+      <p><small>Published on {{ blog_date }}</small></p>
+      <img src="{{ blog_image_url }}" alt="{{ blog_title }}" class="img-fluid mb-4">
+
+      <!-- ✅ Blog body -->
+      <section>
+        <p>{{ blog_intro_paragraph }}</p>
+        <p>... your content here ...</p>
+      </section>
+    </article>
+  </main>
+
+  <!-- ✅ Footer -->
+  <footer class="text-center mt-5">
+    <p>&copy; 2025 Khaleeq Rehman. All rights reserved.</p>
+  </footer>
+
+  <!-- ✅ Scripts -->
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
