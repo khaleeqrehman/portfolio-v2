@@ -4,28 +4,45 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CMS</title>
-  <!-- Load CSS separately -->
-  <link rel="stylesheet" href="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.css">
+  <style>
+    /* Isolated container to prevent external interference */
+    #cms-container {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+    }
+  </style>
+  <!-- Preload assets -->
+  <link rel="preload" href="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.css" as="style">
+  <link rel="preload" href="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js" as="script">
 </head>
 <body>
-  <!-- Isolated mount point with explicit ID -->
-  <div id="cms-root" style="position: relative; z-index: 1;"></div>
+  <!-- Double-nested container for stability -->
+  <div id="cms-container">
+    <div id="cms-root"></div>
+  </div>
+
+  <!-- Load CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.css">
 
   <!-- Load JS with defer -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js" defer></script>
 
-  <!-- Safe initialization with error handling -->
+  <!-- Safe initialization -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       function initCMS() {
-        const root = document.getElementById('cms-root');
-        if (!root) {
-          console.error('CMS mount point not found');
+        const container = document.getElementById('cms-container');
+        if (!container) {
+          console.error('CMS container missing');
           return;
         }
 
         if (window.CMS) {
           try {
+            // Ensure clean slate
+            container.innerHTML = '<div id="cms-root"></div>';
+            
             CMS.init({
               config: {
                 backend: {
@@ -39,7 +56,9 @@
               }
             });
           } catch (e) {
-            console.error('CMS init failed:', e);
+            console.error('CMS initialization failed:', e);
+            // Fallback: Reload CMS container
+            setTimeout(initCMS, 500);
           }
         } else {
           setTimeout(initCMS, 100);
