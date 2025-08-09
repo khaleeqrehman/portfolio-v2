@@ -206,6 +206,9 @@
   /* ========================================
   DARK MODE SUPPORT
 ======================================== */
+/* ========================================
+  DARK MODE SUPPORT (COMPLETE VERSION)
+======================================== */
 @media (prefers-color-scheme: dark) {
   :root {
     /* Dark mode color variables */
@@ -241,12 +244,15 @@
     border-color: var(--border-dark) !important;
   }
 
-  /* Cards and buttons */
+  /* Cards - Added specific selectors */
   .card,
+  .blog-sidebar .card,
+  .blog-sidebar .card-body,
+  .related-posts .card,
   .btn {
-    background-color: var(--card-dark);
-    border-color: var(--border-dark);
-    color: var(--text-dark);
+    background-color: var(--card-dark) !important;
+    border-color: var(--border-dark) !important;
+    color: var(--text-dark) !important;
   }
 
   /* Code blocks */
@@ -282,6 +288,14 @@
 
   .border {
     border-color: var(--border-dark) !important;
+  }
+
+  /* Blog-specific fixes */
+  .blog-share .share-icon {
+    color: var(--link-dark) !important;
+  }
+  .blog-share .share-icon:hover {
+    color: var(--link-hover-dark) !important;
   }
 }
 /* ========================================
