@@ -3,58 +3,84 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Content Manager</title>
+  <title>Khaleeq's Blog CMS</title>
   <!-- Favicon fix -->
   <link rel="icon" href="data:,">
   
-  <!-- Decap CMS with fallback -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js?v=1754733804"
-          integrity="sha384-9XvaHXQYQZPJojaVcAgiP2kK43i2P0X6XyF6QGKwL0EjQNu3i6kZjUHKf8B1CSPB"
-          crossorigin="anonymous"></script>
+  <!-- Decap CMS from reliable CDN with fallback -->
+  <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.8.1/dist/decap-cms.js"></script>
+  
+  <!-- Fallback loading check -->
   <script>
-    if (typeof CMS === 'undefined') {
-      console.error('CMS failed to load!');
-      document.write('<h1 style="color:red">CMS failed to load. Check:<br>1. Internet connection<br>2. Browser console</h1>');
-    }
+    window.CMS_LOAD_TIMEOUT = setTimeout(function() {
+      if (!window.CMS) {
+        document.body.innerHTML = `
+          <div style="font-family: sans-serif; padding: 2rem; max-width: 800px; margin: 0 auto;">
+            <h1 style="color: #d32f2f;">CMS Loading Failed</h1>
+            <p>Try these steps:</p>
+            <ol>
+              <li><strong>Refresh the page</strong> (Ctrl + F5)</li>
+              <li><strong>Disable ad-blockers/extensions</strong></li>
+              <li><strong>Try a different browser</strong> (Chrome/Firefox recommended)</li>
+              <li><strong>Wait 5 minutes</strong> and try again</li>
+            </ol>
+            <p>If the problem persists, contact support with browser console screenshots.</p>
+          </div>
+        `;
+      }
+    }, 5000); // 5 second timeout
   </script>
 </head>
 <body>
-  <!-- Loading indicator -->
-  <div id="cms-loading" style="font-family: sans-serif; padding: 2rem">
-    Loading CMS...
+  <!-- Loading placeholder -->
+  <div id="cms-loading" style="font-family: sans-serif; text-align: center; padding: 3rem;">
+    <h2>Loading Content Manager...</h2>
+    <p>Initializing CMS interface</p>
   </div>
 
+  <!-- Main CMS Initialization -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       try {
-        CMS.init({
-          config: {
-            backend: {
-              name: "git-gateway",
-              branch: "main",
-              repo: "khaleeqrehman/portfolio-v2",
-              site_domain: "https://khaleeq.vercel.app"
-            },
-            load_config_file: false,
-            media_folder: "static/images/uploads",
-            public_folder: "/images/uploads",
-            collections: [{
-              name: "posts",
-              label: "Blog Posts",
-              folder: "content/posts",
-              fields: [
-                { label: "Title", name: "title", widget: "string" },
-                { label: "Publish Date", name: "date", widget: "datetime" },
-                { label: "Body", name: "body", widget: "markdown" }
-              ]
-            }]
-          }
-        });
-        document.getElementById('cms-loading').style.display = 'none';
+        if (window.CMS) {
+          clearTimeout(window.CMS_LOAD_TIMEOUT);
+          
+          CMS.init({
+            config: {
+              backend: {
+                name: "git-gateway",
+                branch: "main",
+                repo: "khaleeqrehman/portfolio-v2",
+                site_domain: "https://khaleeq.vercel.app"
+              },
+              load_config_file: false,
+              media_folder: "static/images/uploads",
+              public_folder: "/images/uploads",
+              collections: [{
+                name: "posts",
+                label: "Blog Posts",
+                folder: "content/posts",
+                create: true,
+                fields: [
+                  { label: "Title", name: "title", widget: "string" },
+                  { label: "Publish Date", name: "date", widget: "datetime" },
+                  { label: "Body", name: "body", widget: "markdown" }
+                ]
+              }]
+            }
+          });
+          
+          document.getElementById('cms-loading').style.display = 'none';
+        }
       } catch (e) {
-        console.error('CMS init failed:', e);
-        document.getElementById('cms-loading').innerHTML = 
-          '<h2 style="color:red">CMS Error</h2><p>' + e.message + '</p>';
+        console.error('CMS initialization error:', e);
+        document.getElementById('cms-loading').innerHTML = `
+          <div style="color: #d32f2f;">
+            <h2>CMS Configuration Error</h2>
+            <p>${e.message}</p>
+            <p>Check your browser console for details.</p>
+          </div>
+        `;
       }
     });
   </script>
