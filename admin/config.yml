@@ -1,17 +1,18 @@
 backend:
-  name: git-gateway
-  branch: main
+  name: github
+  repo: khaleeqrehman/portfolio-v2  # Your exact GitHub repo
+  branch: main                      # Default branch
 
-media_folder: "static/images/uploads"
-public_folder: "/images/uploads"
+media_folder: "static/images/uploads"  # Images stored here
+public_folder: "/images/uploads"       # Public path for images
 
 collections:
   - name: "posts"
     label: "Blog Posts"
-    folder: "content/posts"
-    create: true
+    folder: "content/posts"         # Path to your posts
+    create: true                    # Allow new posts
+    slug: "{{slug}}"                # Auto-generated URLs
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Featured Image", name: "image", widget: "image" }
+      - { label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
       - { label: "Body", name: "body", widget: "markdown" }

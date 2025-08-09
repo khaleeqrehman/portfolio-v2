@@ -7,8 +7,8 @@
   <!-- Favicon fix -->
   <link rel="icon" href="data:,">
   
-  <!-- Decap CMS from reliable CDN with fallback -->
-  <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.8.1/dist/decap-cms.js"></script>
+  <!-- Decap CMS from CDN -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   
   <!-- Fallback loading check -->
   <script>
@@ -22,65 +22,48 @@
               <li><strong>Refresh the page</strong> (Ctrl + F5)</li>
               <li><strong>Disable ad-blockers/extensions</strong></li>
               <li><strong>Try a different browser</strong> (Chrome/Firefox recommended)</li>
-              <li><strong>Wait 5 minutes</strong> and try again</li>
             </ol>
-            <p>If the problem persists, contact support with browser console screenshots.</p>
           </div>
         `;
       }
-    }, 5000); // 5 second timeout
+    }, 5000);
   </script>
 </head>
 <body>
   <!-- Loading placeholder -->
   <div id="cms-loading" style="font-family: sans-serif; text-align: center; padding: 3rem;">
     <h2>Loading Content Manager...</h2>
-    <p>Initializing CMS interface</p>
   </div>
 
-  <!-- Main CMS Initialization -->
+  <!-- CMS Initialization -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      try {
-        if (window.CMS) {
-          clearTimeout(window.CMS_LOAD_TIMEOUT);
-          
-          CMS.init({
-            config: {
-              backend: {
-                name: "git-gateway",
-                branch: "main",
-                repo: "khaleeqrehman/portfolio-v2",
-                site_domain: "https://khaleeq.vercel.app"
-              },
-              load_config_file: false,
-              media_folder: "static/images/uploads",
-              public_folder: "/images/uploads",
-              collections: [{
-                name: "posts",
-                label: "Blog Posts",
-                folder: "content/posts",
-                create: true,
-                fields: [
-                  { label: "Title", name: "title", widget: "string" },
-                  { label: "Publish Date", name: "date", widget: "datetime" },
-                  { label: "Body", name: "body", widget: "markdown" }
-                ]
-              }]
-            }
-          });
-          
-          document.getElementById('cms-loading').style.display = 'none';
-        }
-      } catch (e) {
-        console.error('CMS initialization error:', e);
-        document.getElementById('cms-loading').innerHTML = `
-          <div style="color: #d32f2f;">
-            <h2>CMS Configuration Error</h2>
-            <p>${e.message}</p>
-            <p>Check your browser console for details.</p>
-          </div>
-        `;
+      if (window.CMS) {
+        clearTimeout(window.CMS_LOAD_TIMEOUT);
+        // Initialize CMS with GitHub backend
+        CMS.init({
+          config: {
+            backend: {
+              name: "github",  // Changed from git-gateway to github
+              repo: "khaleeqrehman/portfolio-v2",
+              branch: "main"
+            },
+            media_folder: "static/images/uploads",
+            public_folder: "/images/uploads",
+            collections: [{
+              name: "posts",
+              label: "Blog Posts",
+              folder: "content/posts",
+              create: true,
+              fields: [
+                { label: "Title", name: "title", widget: "string" },
+                { label: "Publish Date", name: "date", widget: "datetime" },
+                { label: "Body", name: "body", widget: "markdown" }
+              ]
+            }]
+          }
+        });
+        document.getElementById('cms-loading').style.display = 'none';
       }
     });
   </script>
