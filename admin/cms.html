@@ -2,42 +2,50 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CMS</title>
-  <!-- Load CSS first -->
+  <!-- Load CSS separately -->
   <link rel="stylesheet" href="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.css">
-  <!-- Preload JS -->
-  <link rel="preload" href="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js" as="script">
 </head>
 <body>
-  <!-- Mount point -->
-  <div id="cms-root"></div>
+  <!-- Isolated mount point with explicit ID -->
+  <div id="cms-root" style="position: relative; z-index: 1;"></div>
 
-  <!-- Load script with defer -->
+  <!-- Load JS with defer -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js" defer></script>
 
-  <!-- Safe initialization -->
+  <!-- Safe initialization with error handling -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Wait for CMS to be fully loaded
-      function waitForCMS() {
-        if (window.CMS && window.CMS.registerBackend) {
-          CMS.init({
-            config: {
-              backend: {
-                name: "github",
-                repo: "khaleeqrehman/portfolio-v2",
-                branch: "main"
-              },
-              media_folder: "static/images/uploads",
-              public_folder: "/images/uploads",
-              collections: [ /* your collections */ ]
-            }
-          });
+      function initCMS() {
+        const root = document.getElementById('cms-root');
+        if (!root) {
+          console.error('CMS mount point not found');
+          return;
+        }
+
+        if (window.CMS) {
+          try {
+            CMS.init({
+              config: {
+                backend: {
+                  name: "github",
+                  repo: "khaleeqrehman/portfolio-v2",
+                  branch: "main"
+                },
+                media_folder: "static/images/uploads",
+                public_folder: "/images/uploads",
+                collections: [ /* your collections */ ]
+              }
+            });
+          } catch (e) {
+            console.error('CMS init failed:', e);
+          }
         } else {
-          setTimeout(waitForCMS, 100);
+          setTimeout(initCMS, 100);
         }
       }
-      waitForCMS();
+      initCMS();
     });
   </script>
 </body>
