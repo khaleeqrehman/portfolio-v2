@@ -1,69 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Khaleeq's Blog CMS</title>
-  <!-- Favicon fix -->
-  <link rel="icon" href="data:,">
-  
-  <!-- Decap CMS from CDN -->
+  <title>Blog CMS</title>
+  <!-- Load Decap CMS from CDN -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-  
-  <!-- Fallback loading check -->
-  <script>
-    window.CMS_LOAD_TIMEOUT = setTimeout(function() {
-      if (!window.CMS) {
-        document.body.innerHTML = `
-          <div style="font-family: sans-serif; padding: 2rem; max-width: 800px; margin: 0 auto;">
-            <h1 style="color: #d32f2f;">CMS Loading Failed</h1>
-            <p>Try these steps:</p>
-            <ol>
-              <li><strong>Refresh the page</strong> (Ctrl + F5)</li>
-              <li><strong>Disable ad-blockers/extensions</strong></li>
-              <li><strong>Try a different browser</strong> (Chrome/Firefox recommended)</li>
-            </ol>
-          </div>
-        `;
-      }
-    }, 5000);
-  </script>
+  <style>
+    /* Isolated styles to prevent clashes */
+    body { 
+      margin: 0; 
+      font-family: Arial, sans-serif;
+      background: white; /* Force white background for CMS only */
+    }
+  </style>
 </head>
 <body>
-  <!-- Loading placeholder -->
-  <div id="cms-loading" style="font-family: sans-serif; text-align: center; padding: 3rem;">
-    <h2>Loading Content Manager...</h2>
-  </div>
-
-  <!-- CMS Initialization -->
+  <!-- CMS mounts here automatically -->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      if (window.CMS) {
-        clearTimeout(window.CMS_LOAD_TIMEOUT);
-        // Initialize CMS with GitHub backend
-        CMS.init({
-          config: {
-            backend: {
-              name: "github",  // Changed from git-gateway to github
-              repo: "khaleeqrehman/portfolio-v2",
-              branch: "main"
-            },
-            media_folder: "static/images/uploads",
-            public_folder: "/images/uploads",
-            collections: [{
-              name: "posts",
-              label: "Blog Posts",
-              folder: "content/posts",
-              create: true,
-              fields: [
-                { label: "Title", name: "title", widget: "string" },
-                { label: "Publish Date", name: "date", widget: "datetime" },
-                { label: "Body", name: "body", widget: "markdown" }
-              ]
-            }]
+    // Initialize CMS with EXPLICIT configuration
+    CMS.init({
+      config: {
+        backend: {
+          name: "github",
+          repo: "khaleeqrehman/portfolio-v2",
+          branch: "main"
+        },
+        media_folder: "static/images/uploads",
+        public_folder: "/images/uploads",
+        collections: [
+          {
+            name: "posts",
+            label: "Blog Posts",
+            folder: "content/posts",
+            fields: [
+              { name: "title", label: "Title", widget: "string" },
+              { name: "date", label: "Date", widget: "datetime" },
+              { name: "body", label: "Body", widget: "markdown" }
+            ]
           }
-        });
-        document.getElementById('cms-loading').style.display = 'none';
+        ]
       }
     });
   </script>
