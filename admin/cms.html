@@ -5,43 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CMS</title>
   <style>
-    /* Isolated container to prevent external interference */
-    #cms-container {
-      position: relative;
-      z-index: 1;
-      min-height: 100vh;
+    /* Create a protected mounting environment */
+    #cms-shield {
+      all: initial; /* Isolate from parent styles */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      background: white;
     }
   </style>
-  <!-- Preload assets -->
-  <link rel="preload" href="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.css" as="style">
-  <link rel="preload" href="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js" as="script">
 </head>
 <body>
-  <!-- Double-nested container for stability -->
-  <div id="cms-container">
+  <!-- Protected mount point -->
+  <div id="cms-shield">
     <div id="cms-root"></div>
   </div>
 
-  <!-- Load CSS -->
+  <!-- Load CSS first -->
   <link rel="stylesheet" href="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.css">
 
   <!-- Load JS with defer -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js" defer></script>
 
-  <!-- Safe initialization -->
+  <!-- Robust initialization -->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    (function() {
+      const MAX_RETRIES = 10;
+      let retryCount = 0;
+      
       function initCMS() {
-        const container = document.getElementById('cms-container');
-        if (!container) {
-          console.error('CMS container missing');
-          return;
-        }
-
-        if (window.CMS) {
-          try {
-            // Ensure clean slate
-            container.innerHTML = '<div id="cms-root"></div>';
+        try {
+          const root = document.getElementById('cms-root');
+          if (!root) throw new Error('Mount point not found');
+          
+          if (window.CMS) {
+            // Create fresh mount point
+            root.innerHTML = '';
             
             CMS.init({
               config: {
@@ -55,17 +57,30 @@
                 collections: [ /* your collections */ ]
               }
             });
-          } catch (e) {
-            console.error('CMS initialization failed:', e);
-            // Fallback: Reload CMS container
-            setTimeout(initCMS, 500);
+          } else {
+            throw new Error('CMS not loaded');
           }
-        } else {
-          setTimeout(initCMS, 100);
+        } catch (e) {
+          if (retryCount < MAX_RETRIES) {
+            retryCount++;
+            console.warn(`Retry ${retryCount}/10:`, e.message);
+            setTimeout(initCMS, 300 * retryCount);
+          } else {
+            console.error('CMS failed to initialize after 10 attempts');
+            document.getElementById('cms-shield').innerHTML = `
+              <div style="padding: 2rem; font-family: sans-serif;">
+                <h2>CMS Loading Failed</h2>
+                <p>Please refresh the page or try again later.</p>
+                <button onclick="window.location.reload()">Retry</button>
+              </div>
+            `;
+          }
         }
       }
-      initCMS();
-    });
+
+      // Start initialization after everything loads
+      window.addEventListener('load', initCMS);
+    })();
   </script>
 </body>
 </html>
