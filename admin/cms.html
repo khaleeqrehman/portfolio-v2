@@ -2,16 +2,22 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Blog CMS</title>
+  <title>CMS</title>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </head>
 <body>
-  <div id="cms-root"></div>  <!-- Explicit mount point -->
+  <!-- Explicit mount point -->
+  <div id="cms-root"></div>
   <script>
-    CMS.init({ 
+    CMS.init({
       config: {
-        backend: { name: "github", repo: "khaleeqrehman/portfolio-v2", branch: "main" },
+        backend: {
+          name: "github",
+          repo: "khaleeqrehman/portfolio-v2",
+          branch: "main"
+        },
         media_folder: "static/images/uploads",
+        public_folder: "/images/uploads",
         collections: [ /* your collections */ ]
       }
     });
