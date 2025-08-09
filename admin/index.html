@@ -1,35 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Content Manager</title>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <!-- Favicon fix -->
+  <link rel="icon" href="data:,">
+  
+  <!-- Decap CMS with fallback -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js?v=1754733804"
+          integrity="sha384-9XvaHXQYQZPJojaVcAgiP2kK43i2P0X6XyF6QGKwL0EjQNu3i6kZjUHKf8B1CSPB"
+          crossorigin="anonymous"></script>
+  <script>
+    if (typeof CMS === 'undefined') {
+      console.error('CMS failed to load!');
+      document.write('<h1 style="color:red">CMS failed to load. Check:<br>1. Internet connection<br>2. Browser console</h1>');
+    }
+  </script>
 </head>
 <body>
+  <!-- Loading indicator -->
+  <div id="cms-loading" style="font-family: sans-serif; padding: 2rem">
+    Loading CMS...
+  </div>
+
   <script>
-    CMS.init({
-      config: {
-        backend: {
-          name: "git-gateway",
-          branch: "main"
-        },
-        load_config_file: false,
-        media_folder: "static/images/uploads",
-        public_folder: "/images/uploads",
-        collections: [
-          {
-            name: "posts",
-            label: "Blog Posts",
-            folder: "content/posts",
-            create: true,
-            fields: [
-              { label: "Title", name: "title", widget: "string" },
-              { label: "Publish Date", name: "date", widget: "datetime" },
-              { label: "Featured Image", name: "image", widget: "image" },
-              { label: "Body", name: "body", widget: "markdown" }
-            ]
+    document.addEventListener('DOMContentLoaded', function() {
+      try {
+        CMS.init({
+          config: {
+            backend: {
+              name: "git-gateway",
+              branch: "main",
+              repo: "khaleeqrehman/portfolio-v2",
+              site_domain: "https://khaleeq.vercel.app"
+            },
+            load_config_file: false,
+            media_folder: "static/images/uploads",
+            public_folder: "/images/uploads",
+            collections: [{
+              name: "posts",
+              label: "Blog Posts",
+              folder: "content/posts",
+              fields: [
+                { label: "Title", name: "title", widget: "string" },
+                { label: "Publish Date", name: "date", widget: "datetime" },
+                { label: "Body", name: "body", widget: "markdown" }
+              ]
+            }]
           }
-        ]
+        });
+        document.getElementById('cms-loading').style.display = 'none';
+      } catch (e) {
+        console.error('CMS init failed:', e);
+        document.getElementById('cms-loading').innerHTML = 
+          '<h2 style="color:red">CMS Error</h2><p>' + e.message + '</p>';
       }
     });
   </script>
