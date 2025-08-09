@@ -4,82 +4,85 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CMS</title>
+  <!-- Inline critical CSS to prevent FOUC -->
   <style>
-    /* Create a protected mounting environment */
-    #cms-shield {
-      all: initial; /* Isolate from parent styles */
+    #cms-iframe {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+      border: none;
       z-index: 9999;
-      background: white;
+    }
+    #cms-loading {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: sans-serif;
     }
   </style>
 </head>
 <body>
-  <!-- Protected mount point -->
-  <div id="cms-shield">
-    <div id="cms-root"></div>
-  </div>
+  <!-- Loading state -->
+  <div id="cms-loading">Loading CMS...</div>
+  
+  <!-- Iframe as complete isolation layer -->
+  <iframe id="cms-iframe" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
 
-  <!-- Load CSS first -->
-  <link rel="stylesheet" href="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.css">
-
-  <!-- Load JS with defer -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js" defer></script>
-
-  <!-- Robust initialization -->
   <script>
     (function() {
-      const MAX_RETRIES = 10;
-      let retryCount = 0;
+      const iframe = document.getElementById('cms-iframe');
+      const loading = document.getElementById('cms-loading');
       
-      function initCMS() {
+      // Wait for iframe to be ready
+      iframe.onload = function() {
         try {
-          const root = document.getElementById('cms-root');
-          if (!root) throw new Error('Mount point not found');
+          const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
           
-          if (window.CMS) {
-            // Create fresh mount point
-            root.innerHTML = '';
-            
-            CMS.init({
-              config: {
-                backend: {
-                  name: "github",
-                  repo: "khaleeqrehman/portfolio-v2",
-                  branch: "main"
-                },
-                media_folder: "static/images/uploads",
-                public_folder: "/images/uploads",
-                collections: [ /* your collections */ ]
-              }
-            });
-          } else {
-            throw new Error('CMS not loaded');
-          }
+          // Inject minimal HTML structure
+          iframeDoc.open();
+          iframeDoc.write(`
+            <!DOCTYPE html>
+            <html>
+            <head>
+              <base href="/admin/">
+              <link rel="stylesheet" href="https://unpkg.com/decap-cms@3.8.3/dist/decap-cms.css">
+            </head>
+            <body>
+              <div id="cms-root"></div>
+              <script src="https://unpkg.com/decap-cms@3.8.3/dist/decap-cms.js"><\/script>
+              <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                  CMS.init({
+                    config: ${JSON.stringify({
+                      backend: {
+                        name: "github",
+                        repo: "khaleeqrehman/portfolio-v2",
+                        branch: "main"
+                      },
+                      media_folder: "static/images/uploads",
+                      public_folder: "/images/uploads",
+                      collections: [ /* your collections */ ]
+                    })}
+                  });
+                });
+              <\/script>
+            </body>
+            </html>
+          `);
+          iframeDoc.close();
+          
+          loading.style.display = 'none';
         } catch (e) {
-          if (retryCount < MAX_RETRIES) {
-            retryCount++;
-            console.warn(`Retry ${retryCount}/10:`, e.message);
-            setTimeout(initCMS, 300 * retryCount);
-          } else {
-            console.error('CMS failed to initialize after 10 attempts');
-            document.getElementById('cms-shield').innerHTML = `
-              <div style="padding: 2rem; font-family: sans-serif;">
-                <h2>CMS Loading Failed</h2>
-                <p>Please refresh the page or try again later.</p>
-                <button onclick="window.location.reload()">Retry</button>
-              </div>
-            `;
-          }
+          console.error('Iframe initialization failed:', e);
+          loading.innerHTML = 'CMS failed to load. Please refresh.';
         }
-      }
-
-      // Start initialization after everything loads
-      window.addEventListener('load', initCMS);
+      };
+      
+      // Start loading
+      iframe.src = 'about:blank';
     })();
   </script>
 </body>
