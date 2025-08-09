@@ -3,23 +3,37 @@
 <head>
   <meta charset="utf-8">
   <title>CMS</title>
-  <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.8.1/dist/decap-cms.js"></script>
+  <!-- Preload Decap CMS for faster loading -->
+  <link rel="preload" href="https://unpkg.com/decap-cms@3.8.1/dist/decap-cms.js" as="script">
 </head>
 <body>
-  <!-- Explicit mount point -->
   <div id="cms-root"></div>
+
+  <!-- Load script with async and defer -->
+  <script src="https://unpkg.com/decap-cms@3.8.1/dist/decap-cms.js" async defer></script>
+
+  <!-- Initialize only after script loads -->
   <script>
-    CMS.init({
-      config: {
-        backend: {
-          name: "github",
-          repo: "khaleeqrehman/portfolio-v2",
-          branch: "main"
-        },
-        media_folder: "static/images/uploads",
-        public_folder: "/images/uploads",
-        collections: [ /* your collections */ ]
+    document.addEventListener('DOMContentLoaded', function() {
+      function initCMS() {
+        if (window.CMS) {
+          CMS.init({
+            config: {
+              backend: {
+                name: "github",
+                repo: "khaleeqrehman/portfolio-v2",
+                branch: "main"
+              },
+              media_folder: "static/images/uploads",
+              public_folder: "/images/uploads",
+              collections: [ /* your collections */ ]
+            }
+          });
+        } else {
+          setTimeout(initCMS, 100); // Retry every 100ms until CMS loads
+        }
       }
+      initCMS();
     });
   </script>
 </body>
