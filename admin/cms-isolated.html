@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>CMS</title>
+  <!-- Load from CDN with cache busting -->
+  <link rel="stylesheet" 
+    href="https://cdn.jsdelivr.net/npm/decap-cms@3.8.3/dist/decap-cms.css?ver=<?=time()?>">
+</head>
+<body>
+  <!-- Fresh mount point -->
+  <div id="cms-root"></div>
+
+  <!-- Load script with cache busting -->
+  <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.8.3/dist/decap-cms.js?ver=<?=time()?>"></script>
+
+  <!-- Atomic initialization -->
+  <script>
+    (function() {
+      // Create fresh config object
+      const config = {
+        backend: {
+          name: "github",
+          repo: "khaleeqrehman/portfolio-v2",
+          branch: "main"
+        },
+        media_folder: "static/images/uploads",
+        public_folder: "/images/uploads",
+        collections: [ /* your collections */ ]
+      };
+
+      // Nuclear option: Complete DOM wipe
+      document.body.innerHTML = '<div id="cms-root"></div>';
+      
+      // Wait for everything to settle
+      setTimeout(() => {
+        try {
+          CMS.init({ config });
+        } catch (e) {
+          console.error('CMS Failed:', e);
+          // Final fallback
+          location.href = '/admin/cms-loader.html?retry=' + Date.now();
+        }
+      }, 500); // Safety delay
+    })();
+  </script>
+</body>
+</html>
