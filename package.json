@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "@nuxt/content": "^3.6.3",
-    "decap-cms": "^3.8.3"
-  }
-}
