@@ -10,43 +10,30 @@
   <meta name="keywords" content="IT blog, web development, tech trends, career, digital skills" />
   <meta name="author" content="Khaleeq Ur Rehman" />
 
-  <!-- OG Tags -->
+  <!-- OG / Twitter -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Blog - Khaleeq Ur Rehman">
   <meta property="og:description" content="Explore tech insights and tutorials from Khaleeq Ur Rehman.">
-  <meta property="og:image" content="https://yourdomain.com/assets/img/cover.jpg">
-  <meta property="og:url" content="https://yourdomain.com/blog/blog.html">
-
-  <!-- Twitter Card Meta Tags -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Blog - Khaleeq Ur Rehman" />
-  <meta name="twitter:description" content="Explore tech insights and tutorials from Khaleeq Ur Rehman." />
-  <meta name="twitter:image" content="https://yourdomain.com/assets/img/cover.jpg" />
-
-  <link rel="canonical" href="https://yourdomain.com/blog/blog.html" />
+  <meta property="og:image" content="https://khaleeq.vercel.app/assets/img/cover.jpg">
+  <meta property="og:url" content="https://khaleeq.vercel.app/blog/blog.html">
+  <link rel="canonical" href="https://khaleeq.vercel.app/blog/blog.html" />
 
   <!-- Favicon -->
   <link rel="icon" href="../assets/img/favicon.jpg" />
   <link rel="apple-touch-icon" href="../assets/img/favicon.jpg" />
 
-  <!-- Fonts & Styles -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Vendor CSS -->
   <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
   <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+
+  <!-- Main CSS (correct relative paths) -->
   <link href="../assets/css/main.css" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="path/to/bootstrap.min.css">
+  <link href="../assets/css/style.css" rel="stylesheet" />
 
-<!-- Your Custom CSS (must come after Bootstrap) -->
-<link rel="stylesheet" href="../assets/css/style.css">
-
-  
-
-
-
-
-  <!-- Google Analytics -->
+  <!-- Google Analytics (keep if you use it) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-0YR85W1ZCQ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -55,24 +42,33 @@
     gtag('config', 'G-0YR85W1ZCQ');
   </script>
 
+  <meta name="robots" content="index, follow" />
 </head>
 
 <body class="index-page">
   <!-- Header -->
   <header id="header" class="header dark-background d-flex flex-column">
-    <i class="header-toggle d-xl-none bi bi-list"></i>
+    <button class="d-xl-none btn border-0 bg-transparent p-0" 
+            data-bs-toggle="offcanvas" 
+            data-bs-target="#mobileMenu"
+            aria-label="Toggle navigation">
+      <i class="bi bi-list fs-3 text-white"></i>
+    </button>
+
     <div class="profile-img">
       <img src="../assets/img/my-profile-img.jpeg" alt="Profile" class="img-fluid rounded-circle" loading="lazy">
     </div>
+
     <a href="../index.html" class="logo d-flex align-items-center justify-content-center">
       <h1 class="sitename">Khaleeq Ur Rehman</h1>
-
     </a>
+
     <div class="social-links text-center">
       <a href="https://wa.me/923328889089" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
       <a href="mailto:khaleeq.rehman11@gmail.com" class="email"><i class="bi bi-envelope"></i></a>
       <a href="https://github.com/khaleeqrehman" class="github"><i class="bi bi-github"></i></a>
     </div>
+
     <nav id="navmenu" class="navmenu">
       <ul>
         <li><a href="../index.html#hero"><i class="bi bi-house navicon"></i> Home</a></li>
@@ -86,14 +82,11 @@
     </nav>
   </header>
 
-  <!-- Blog Index Content -->  
- 
-
+  <!-- Main blog list -->
   <main class="container mt-5 pt-4">
-
-  <div class="text-end mb-3">
-    <a href="search.html" class="btn btn-outline-primary">🔍 Search</a>
-  </div>
+    <div class="text-end mb-3">
+      <a href="search.html" class="btn btn-outline-primary">🔍 Search</a>
+    </div>
 
     <div class="section-title text-center mb-5">
       <h2>Latest Blog Posts</h2>
@@ -101,7 +94,7 @@
     </div>
 
     <div class="row">
-      <!-- Blog Post Card -->
+      <!-- Example Blog Post Card (duplicate this block per post) -->
       <div class="col-md-6 col-lg-4 mb-4">
         <div class="card h-100 shadow-sm border-0">
           <img src="../assets/img/blog1.jpg" class="card-img-top" alt="Top IT Skills in 2025">
@@ -112,44 +105,40 @@
           </div>
         </div>
       </div>
-
-      <!-- Add more blog cards as needed -->
+      <!-- End post card -->
     </div>
 
     <!-- CTA -->
     <div class="cta-section mt-5 p-4 text-center" style="background:#f2f2f2; border-radius:12px;">
       <h4 class="mb-2">Have a project in mind?</h4>
       <p class="mb-3">Let's work together — message me directly!</p>
-      <a href="https://wa.me/923328889089" class="btn btn-success" target="_blank">
-        Chat on WhatsApp
-      </a>
+      <a href="https://wa.me/923328889089" class="btn btn-success" target="_blank">Chat on WhatsApp</a>
     </div>
 
-
-<div class="pagination d-flex justify-content-center mt-5">
-  <nav>
-    <ul class="pagination">
-      <li class="page-item active"><a class="page-link" href="blog.html">1</a></li>
-      <li class="page-item"><a class="page-link" href="blog-page-2.html">2</a></li>
-      <!-- Add more as needed -->
-      <li class="page-item">
-        <a class="page-link" href="blog-page-2.html" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
-</div>
+    <div class="pagination d-flex justify-content-center mt-5">
+      <nav>
+        <ul class="pagination">
+          <li class="page-item active"><a class="page-link" href="blog.html">1</a></li>
+          <li class="page-item"><a class="page-link" href="blog-page-2.html">2</a></li>
+          <li class="page-item">
+            <a class="page-link" href="blog-page-2.html" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
 
   </main>
 
-
   <!-- Footer -->
   <footer class="text-center py-4">
-    <p class="mb-0">© 2025 Khaleeq Ur Rehman. All rights reserved.</p>
+    <p class="mb-0">© <span id="year"></span> Khaleeq Ur Rehman. All rights reserved.</p>
   </footer>
 
-  <!-- Scripts -->
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+  <!-- Vendor JS -->
   <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/vendor/aos/aos.js"></script>
   <script src="../assets/vendor/purecounter/purecounter_vanilla.js"></script>
@@ -157,21 +146,8 @@
   <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="../assets/vendor/typed.js/typed.umd.js"></script>
-  <script src="../assets/js/main.js"></script>
 
-  <!-- Navigation Toggle Script -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const toggle = document.querySelector(".header-toggle");
-      const body = document.querySelector("body");
-      if (toggle) {
-        toggle.addEventListener("click", function () {
-          body.classList.toggle("navmenu-active");
-          toggle.classList.toggle("bi-list");
-          toggle.classList.toggle("bi-x");
-        });
-      }
-    });
-  </script>
+  <!-- Main JS -->
+  <script src="../assets/js/main.js"></script>
 </body>
 </html>
