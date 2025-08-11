@@ -1,118 +1,110 @@
-/* Blogger Override CSS - Match Portfolio Website */
+/* === Blogger Override CSS === */
 
-/* Reset & Base */
+/* Global background */
 body {
-  font-family: 'Poppins', 'Roboto', sans-serif;
-  background-color: #0d1117;
-  color: #e6edf3;
-  margin: 0;
-  padding: 0;
+    background-color: #0d0f13 !important; /* dark background */
+    color: #ffffff !important;
 }
 
-a {
-  color: #58a6ff;
-  text-decoration: none;
-}
-a:hover {
-  text-decoration: underline;
-}
-
-/* Header */
-.header-outer, .header-inner {
-  background-color: #161b22 !important;
-  border-bottom: 1px solid #30363d;
-}
-.header-outer h1, .header-inner h1 {
-  color: #e6edf3 !important;
-  font-weight: 600;
-}
-
-/* Blog post cards */
-.post {
-  background-color: #161b22;
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-}
-
-.post-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #e6edf3;
-}
-
-.post-body {
-  color: #c9d1d9;
-  line-height: 1.6;
-}
-
-/* Sidebar widgets */
-.sidebar .widget {
-  background-color: #161b22;
-  padding: 15px;
-  margin-bottom: 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-}
-
-.sidebar h2 {
-  color: #e6edf3;
-  font-size: 1.2rem;
-  margin-bottom: 10px;
-}
-
-/* Popular posts widget */
-.PopularPosts .item-title a {
-  color: #58a6ff;
-}
-.PopularPosts .item-title a:hover {
-  color: #79c0ff;
-}
-
-/* Footer */
-.footer-outer {
-  background-color: #161b22;
-  color: #8b949e;
-  padding: 20px;
-  text-align: center;
-  border-top: 1px solid #30363d;
-}
-
-/* Responsive fixes */
-@media (max-width: 768px) {
-  .post {
-    padding: 15px;
-  }
-  .sidebar {
-    padding: 10px;
-  }
-}
-/* Remove white background from header and menu */
+/* Remove white backgrounds from header & menu */
 .header-outer-container,
 .header-inner,
 .main-navigation,
 .main-navigation ul,
-.main-navigation li {
+.main-navigation li,
+.main-header {
     background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
 }
 
-/* Remove white background from blog body area */
+/* Remove white background from main content areas */
 #content-wrapper,
 .blog-posts,
-.post {
+.post,
+.post-body,
+article,
+.main {
     background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
 }
 
-/* Set text color for dark background */
+/* Remove white background from gadgets/widgets */
+.widget-content,
+.sidebar,
+#sidebar-wrapper {
+    background: transparent !important;
+    border: none !important;
+}
+
+/* Navigation menu link styling */
 .main-navigation a,
-.header h1 a,
-.header h1 {
+.main-navigation a:visited {
     color: #ffffff !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
 }
 
-/* Adjust spacing if needed */
-.header-inner,
-.main-navigation {
-    padding: 10px 0 !important;
+.main-navigation a:hover {
+    color: #1e90ff !important; /* hover color */
+}
+
+/* Blog title styling */
+.header h1,
+.header h1 a {
+    color: #ffffff !important;
+    font-size: 2rem !important;
+    font-weight: bold !important;
+    text-decoration: none !important;
+}
+
+/* Post titles */
+.post-title,
+.post-title a {
+    color: #ffffff !important;
+    font-weight: bold !important;
+    text-decoration: none !important;
+}
+
+.post-title a:hover {
+    color: #1e90ff !important;
+}
+
+/* Post text */
+.post-body {
+    color: #e0e0e0 !important;
+    line-height: 1.6 !important;
+}
+
+/* Footer styling */
+.footer-outer-container,
+.footer {
+    background: transparent !important;
+    color: #aaaaaa !important;
+    border-top: 1px solid rgba(255,255,255,0.1) !important;
+}
+
+/* Images max width fix */
+img {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+/* Buttons & form elements */
+button,
+input[type="submit"],
+input[type="button"] {
+    background-color: #1e90ff !important;
+    color: #ffffff !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    cursor: pointer !important;
+}
+
+button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover {
+    background-color: #0f6ed6 !important;
 }
