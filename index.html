@@ -736,11 +736,12 @@ referrerpolicy="no-referrer-when-downgrade"></iframe>
   <i class="bi bi-whatsapp whatsapp-icon"></i>
 </a>
 
+<!-- Scroll Top Button -->
+<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center">
+  <i class="bi bi-arrow-up-short"></i>
+</a>
 
-  <!-- Scroll Top Button -->
-<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-<!-- Vendor JS Files (Single Load - No Duplicates) -->
+<!-- Vendor JS Files -->
 <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="assets/vendor/aos/aos.js"></script>
 <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
@@ -754,41 +755,23 @@ referrerpolicy="no-referrer-when-downgrade"></iframe>
 <!-- Main JS File -->
 <script src="assets/js/main.js"></script>
 
-<!-- Initialize All Components -->
+<!-- Initialize Components -->
 <script>
-  // 1. Initialize Bootstrap Offcanvas (for mobile menu)
   document.addEventListener('DOMContentLoaded', function() {
-    const offcanvas = new bootstrap.Offcanvas(document.getElementById('mobileMenu'));
-  });
+    // Initialize Bootstrap Offcanvas
+    const offcanvasElement = document.getElementById('mobileMenu');
+    if (offcanvasElement) {
+      new bootstrap.Offcanvas(offcanvasElement);
+    }
 
-  // 2. Initialize AOS (Animate On Scroll)
-  AOS.init({
-    duration: 600,
-    easing: 'ease-in-out',
-    once: true
+    // Initialize AOS
+    AOS.init({
+      duration: 600,
+      easing: 'ease-in-out',
+      once: true
+    });
   });
-
-  // 3. Remove old mobile menu script (no longer needed)
-  // The testing script with header-toggle can be deleted completely
 </script>
-
-
-<link rel="stylesheet" href="aos.css">
-  
-  <!-- Your main CSS -->
-  <link rel="stylesheet" href="styles.css">
-  
-  <!-- jQuery (if needed) -->
-  <script src="jquery.js"></script>
-  
-  <!-- AOS JS (if using) -->
-  <script src="aos.js"></script>
-  
-  <!-- Your main JS -->
-  <script src="scripts.js"></script>
-  
-  <!-- Initialize AOS AFTER your scripts -->
-  <script>AOS.init();</script>
 </body>
 
 </html>
