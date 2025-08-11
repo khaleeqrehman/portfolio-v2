@@ -1,110 +1,151 @@
-/* === Blogger Override CSS === */
+/* ==== blogger-override.css (final) ==== */
+/* Purpose: make Blogger blog visually match portfolio blog layout */
 
-/* Global background */
-body {
-    background-color: #0d0f13 !important; /* dark background */
-    color: #ffffff !important;
+/* --- Colors / typography --- */
+:root{
+  --primary:#0b3d91;
+  --accent:#1e90ff;
+  --page-bg:#f6f7f9;
+  --card-bg:#ffffff;
+  --text:#222;
+  --muted:#6b6b6b;
 }
 
-/* Remove white backgrounds from header & menu */
-.header-outer-container,
-.header-inner,
-.main-navigation,
-.main-navigation ul,
-.main-navigation li,
-.main-header {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
+/* Page background and base font */
+html,body {
+  background: var(--page-bg) !important;
+  color: var(--text) !important;
+  font-family: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial !important;
+  -webkit-font-smoothing:antialiased !important;
+  -moz-osx-font-smoothing:grayscale !important;
 }
 
-/* Remove white background from main content areas */
-#content-wrapper,
-.blog-posts,
-.post,
-.post-body,
-article,
-.main {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
+/* Content container */
+.content-outer, .main-outer, #content-wrapper, .content-inner {
+  max-width: 1100px !important;
+  margin: 0 auto !important;
+  padding: 28px 18px !important;
+  background: transparent !important;
 }
 
-/* Remove white background from gadgets/widgets */
-.widget-content,
-.sidebar,
-#sidebar-wrapper {
-    background: transparent !important;
-    border: none !important;
+/* Blog posts list & card look */
+div.blog-posts, .blog-posts, .post, .article, article {
+  background: transparent !important;
 }
 
-/* Navigation menu link styling */
-.main-navigation a,
-.main-navigation a:visited {
-    color: #ffffff !important;
-    font-weight: 600 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.5px !important;
+.widget.Blog .post,
+.post {
+  background: var(--card-bg) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 6px 20px rgba(16,24,40,0.06) !important;
+  padding: 18px !important;
+  margin-bottom: 22px !important;
+  border: 1px solid rgba(16,24,40,0.04) !important;
 }
 
-.main-navigation a:hover {
-    color: #1e90ff !important; /* hover color */
+/* Post image behave like card image */
+.post img, .card-img-top, .post-body img {
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  object-fit:cover !important;
+  border-radius: 8px !important;
 }
 
-/* Blog title styling */
-.header h1,
-.header h1 a {
-    color: #ffffff !important;
-    font-size: 2rem !important;
-    font-weight: bold !important;
-    text-decoration: none !important;
+/* Post title */
+.post-title, .entry-title, h2.post-title {
+  color: var(--primary) !important;
+  font-weight: 600 !important;
+  font-size: 1.25rem !important;
+  margin-bottom: 8px !important;
 }
 
-/* Post titles */
-.post-title,
-.post-title a {
-    color: #ffffff !important;
-    font-weight: bold !important;
-    text-decoration: none !important;
+/* Excerpt text */
+.post-body, .entry-content, .post-snippet {
+  color: var(--text) !important;
+  line-height: 1.7 !important;
+  font-size: 15.5px !important;
+  margin-bottom: 12px !important;
 }
 
-.post-title a:hover {
-    color: #1e90ff !important;
+/* Read more button */
+.post-readmore a, .post .read-more, .post .post-readmore a, a.btn {
+  background: var(--primary) !important;
+  color: #fff !important;
+  padding: 8px 12px !important;
+  border-radius: 8px !important;
+  text-decoration: none !important;
+  display:inline-block !important;
+  border:none !important;
+}
+.post-readmore a:hover, a.btn:hover { background: var(--accent) !important; }
+
+/* Sidebar widget cards */
+.sidebar .widget, .sidebar .widget-content, .widget {
+  background: var(--card-bg) !important;
+  border-radius: 10px !important;
+  padding: 14px !important;
+  box-shadow: 0 6px 18px rgba(16,24,40,0.04) !important;
+  border: 1px solid rgba(16,24,40,0.03) !important;
+  margin-bottom: 18px !important;
 }
 
-/* Post text */
-.post-body {
-    color: #e0e0e0 !important;
-    line-height: 1.6 !important;
+/* Popular posts item */
+.PopularPosts .item-title a, .popular-posts .post-title a {
+  color: var(--primary) !important;
+  font-weight: 600 !important;
 }
 
-/* Footer styling */
-.footer-outer-container,
-.footer {
-    background: transparent !important;
-    color: #aaaaaa !important;
-    border-top: 1px solid rgba(255,255,255,0.1) !important;
+/* Widgets: titles and links */
+.widget-title, .sidebar .widget .title, .widget .title {
+  color: var(--primary) !important;
+  font-weight: 600 !important;
+  margin-bottom: 10px !important;
+}
+.sidebar a, .widget a {
+  color: var(--primary) !important;
+}
+.sidebar a:hover, .widget a:hover { color: var(--accent) !important; }
+
+/* Header / nav (match portfolio header look) */
+.header, .header-outer, .header-inner, .blog-header {
+  background: transparent !important;
+  padding: 12px 0 !important;
+}
+.header .sitename, .blog-title, .header h1 {
+  color: var(--primary) !important;
+  font-weight: 700 !important;
 }
 
-/* Images max width fix */
-img {
-    max-width: 100% !important;
-    height: auto !important;
+/* Top nav links */
+.main-navigation, .navbar, nav {
+  background: transparent !important;
+  border: none !important;
+}
+.main-navigation a, nav a, .nav a {
+  color: var(--text) !important;
+  font-weight: 600 !important;
+}
+.main-navigation a:hover, nav a:hover { color: var(--primary) !important; }
+
+/* Footer */
+.footer, .footer-outer, .footer-outer-container {
+  background: transparent !important;
+  color: var(--muted) !important;
+  padding: 18px 0 !important;
+  text-align:center !important;
 }
 
-/* Buttons & form elements */
-button,
-input[type="submit"],
-input[type="button"] {
-    background-color: #1e90ff !important;
-    color: #ffffff !important;
-    border: none !important;
-    padding: 10px 20px !important;
-    cursor: pointer !important;
+/* Make sure no white boxes remain */
+div[style*="background:#fff"], .white, .panel, .card {
+  background: transparent !important;
 }
 
-button:hover,
-input[type="submit"]:hover,
-input[type="button"]:hover {
-    background-color: #0f6ed6 !important;
+/* utilities */
+.hidden { display:none !important; }
+
+/* mobile tweaks */
+@media (max-width: 768px) {
+  .content-outer, .main-outer { padding: 18px !important; }
+  .post { padding: 14px !important; }
 }
