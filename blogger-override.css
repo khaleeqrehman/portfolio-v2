@@ -88,3 +88,31 @@ a:hover {
     padding: 10px;
   }
 }
+/* Remove white background from header and menu */
+.header-outer-container,
+.header-inner,
+.main-navigation,
+.main-navigation ul,
+.main-navigation li {
+    background: transparent !important;
+}
+
+/* Remove white background from blog body area */
+#content-wrapper,
+.blog-posts,
+.post {
+    background: transparent !important;
+}
+
+/* Set text color for dark background */
+.main-navigation a,
+.header h1 a,
+.header h1 {
+    color: #ffffff !important;
+}
+
+/* Adjust spacing if needed */
+.header-inner,
+.main-navigation {
+    padding: 10px 0 !important;
+}
